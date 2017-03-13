@@ -5,7 +5,7 @@ android {
         config {
             keyAlias '1'
             keyPassword '123456'
-            storeFile file('C:/Projects/keystore.jks')
+            storeFile file('../cert/keystore.jks')
             storePassword '123456'
         }
     }
@@ -21,16 +21,30 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            applicationIdSuffix ".debug"
         }
         prodDebug {
+            initWith debug
+            applicationIdSuffix ".prodDebug"
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
     }
-//ToDo добавить 1 productFlavour
+    productFlavors {
+        api16 {
+            minSdkVersion 16
+        }
+        api21 {
+            minSdkVersion 21
+        }
+    }
 }
 
 dependencies {
