@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Androchat</string>
-    <string name="push_the_button">Push the button!</string>
+
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="login_button_text">Войти</string>
 </resources>
