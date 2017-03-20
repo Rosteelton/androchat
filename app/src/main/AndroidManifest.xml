@@ -8,16 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ChatsActivity" />
+        <activity
+            android:name=".ChatsActivity"
+            android:label="Выберите чат" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
+        <activity
+            android:name=".AboutActivity"
+            android:label="О приложении" />
     </application>
 
 </manifest>

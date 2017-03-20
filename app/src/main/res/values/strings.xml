@@ -4,4 +4,5 @@
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="login_button_text">Войти</string>
+    <string name="application_about_button_text">О приложении</string>
 </resources>
