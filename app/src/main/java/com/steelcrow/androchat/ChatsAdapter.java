@@ -14,15 +14,17 @@ import java.util.List;
 
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> {
     private List<ChatItem> items;
+    private OnChatItemClickListener listener;
 
-    public ChatsAdapter(List<ChatItem> items) {
+    public ChatsAdapter(List<ChatItem> items, OnChatItemClickListener listener) {
         this.items = items;
+        this.listener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_element, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, listener);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         public TextView title;
         public TextView description;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, final OnChatItemClickListener listener) {
             super(view);
             title = (TextView) view.findViewById(R.id.text_view_title);
             description = (TextView) view.findViewById(R.id.text_view_desc);
@@ -48,7 +50,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "position = " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    listener.onItemClick(getAdapterPosition());
                 }
             });
         }
