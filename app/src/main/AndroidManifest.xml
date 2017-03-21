@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ChatsActivity"
+            android:name=".chatRoom.ChatsActivity"
             android:label="Выберите чат" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -21,6 +21,7 @@
         <activity
             android:name=".AboutActivity"
             android:label="О приложении" />
+        <activity android:name=".conversation.ConversationActivity"></activity>
     </application>
 
 </manifest>

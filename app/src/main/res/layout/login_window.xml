@@ -48,13 +48,13 @@
             android:id="@+id/about_application"
             android:layout_width="@android:dimen/thumbnail_width"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="13dp"
-            android:layout_marginEnd="13dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/application_about_button_text"
-            android:textColor="@android:color/background_light"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="13dp"
+            android:background="#833f51b5"
+            android:text="@string/application_about_button_text"
+            android:textColor="@android:color/background_light" />
     </RelativeLayout>
 
 </LinearLayout>

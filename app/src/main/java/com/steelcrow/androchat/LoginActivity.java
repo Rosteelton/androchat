@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.steelcrow.androchat.chatRoom.ChatsActivity;
+
 public class LoginActivity extends AppCompatActivity {
 
     private TextView login;

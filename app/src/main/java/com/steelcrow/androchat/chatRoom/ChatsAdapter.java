@@ -1,12 +1,13 @@
-package com.steelcrow.androchat;
+package com.steelcrow.androchat.chatRoom;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.steelcrow.androchat.OnChatItemClickListener;
+import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.dto.ChatItem;
 
 import java.util.List;

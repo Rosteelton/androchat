@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#28a71a</color>
+    <color name="conversationBackground">#c9d0fd</color>
+    <color name="colorOfMyMessage">#6bb463</color>
 </resources>
