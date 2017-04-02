@@ -11,7 +11,7 @@
     <string name="activity_about_version">v1.0</string>
 
 
-    <string name="app_name">Androchat</string>
+    <string name="user_login">Some login</string>
 
     <string name="menu_dialogs">Диалоги</string>
     <string name="menu_settings">Настройки</string>

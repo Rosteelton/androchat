@@ -35,7 +35,7 @@ public class StubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stub, container, false);
         NavigationActivity activity = (NavigationActivity) getActivity();
-        activity.setActionBarTitle(title);
+        activity.getSupportActionBar().setTitle(title);
         return view;
     }
 }

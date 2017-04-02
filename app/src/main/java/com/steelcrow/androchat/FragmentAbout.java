@@ -32,7 +32,7 @@ public class FragmentAbout extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         NavigationActivity activity = (NavigationActivity) getActivity();
-        activity.setActionBarTitle(title);
+        activity.getSupportActionBar().setTitle(title);
         return view;
     }
 }

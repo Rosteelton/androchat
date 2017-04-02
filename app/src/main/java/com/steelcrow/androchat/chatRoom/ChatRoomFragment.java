@@ -3,56 +3,73 @@ package com.steelcrow.androchat.chatRoom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.conversation.ConversationActivity;
 import com.steelcrow.androchat.dto.ChatItem;
+import com.steelcrow.androchat.navigation.NavigationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChatsActivity extends AppCompatActivity {
+public class ChatRoomFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private String title;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.chats);
-
-        Intent intent = getIntent();
-        Toast.makeText(this, "Добро пожаловать, "+ intent.getStringExtra("Login") + "!", Toast.LENGTH_SHORT).show();
-
-        initRecyclerView();
+    public static ChatRoomFragment newInstance(String title) {
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        ChatRoomFragment fragment = new ChatRoomFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
-    private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        title = getArguments().getString("title");
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.chats, container, false);
+
+        NavigationActivity activity = (NavigationActivity) getActivity();
+        activity.getSupportActionBar().setTitle(title);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
 
         RecyclerView.Adapter adapter = new ChatsAdapter(getChatList(), new OnChatItemClickListener() {
             @Override
             public void onItemClick(CharSequence title) {
-                Intent intent = new Intent(ChatsActivity.this, ConversationActivity.class);
+                Intent intent = new Intent(getActivity(), ConversationActivity.class);
                 intent.putExtra("chatName", title);
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(activity, layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+        return view;
     }
-
 
     private List<ChatItem> getChatList() {
         List<ChatItem> list = new ArrayList<>();

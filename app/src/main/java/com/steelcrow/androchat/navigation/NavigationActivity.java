@@ -1,5 +1,6 @@
 package com.steelcrow.androchat.navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,15 +13,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.steelcrow.androchat.FragmentAbout;
 import com.steelcrow.androchat.R;
+import com.steelcrow.androchat.chatRoom.ChatRoomFragment;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private final static int MENU_DIALOGS = 0;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -35,7 +41,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_dialogs:
-                StubFragment dialogsFragment = StubFragment.newInstance("Диалоги");
+                ChatRoomFragment dialogsFragment = ChatRoomFragment.newInstance("Диалоги");
                 addFragment(dialogsFragment);
                 break;
             case R.id.nav_settings:
@@ -56,16 +62,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         return true;
     }
 
-
-    public void setActionBarTitle(String title){
-        toolbar.setTitle(title);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
+        Intent intent = getIntent();
+        Toast.makeText(this, "Добро пожаловать, "+ intent.getStringExtra("Login") + "!", Toast.LENGTH_SHORT).show();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,6 +79,10 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView headerUserLoginField = (TextView) headerView.findViewById(R.id.text_view_user_login);
+        headerUserLoginField.setText(intent.getStringExtra("Login"));
 
         if (savedInstanceState == null) {
             navigationView.getMenu().getItem(MENU_DIALOGS).setChecked(true);

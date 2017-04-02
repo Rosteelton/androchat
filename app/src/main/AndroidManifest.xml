@@ -15,7 +15,7 @@
         </activity>
 
         <activity
-            android:name=".chatRoom.ChatsActivity"
+            android:name=".chatRoom.ChatRoomFragment"
             android:label="Выберите чат" />
         <activity android:name=".LoginActivity">
             <intent-filter>
