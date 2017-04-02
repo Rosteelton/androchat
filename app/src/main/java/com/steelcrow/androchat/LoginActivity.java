@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.steelcrow.androchat.chatRoom.ChatsActivity;
+import com.steelcrow.androchat.navigation.NavigationActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextView login;
     private Button aboutButton;
+    private Button logginButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,11 +31,15 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    public void logIn(View view) {
-        Intent intent = new Intent(this, ChatsActivity.class);
-        intent.putExtra("Login", login.getText().toString());
-        startActivity(intent);
+        logginButton = (Button) findViewById(R.id.login_button);
+        logginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
+                intent.putExtra("Login", login.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 }

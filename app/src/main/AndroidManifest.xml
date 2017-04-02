@@ -8,6 +8,12 @@
         android:label="@string/main_greeting_title"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".navigation.NavigationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity
             android:name=".chatRoom.ChatsActivity"
             android:label="Выберите чат" />
@@ -22,6 +28,8 @@
             android:name=".AboutActivity"
             android:label="О приложении" />
         <activity android:name=".conversation.ConversationActivity" />
+
+
     </application>
 
 </manifest>
