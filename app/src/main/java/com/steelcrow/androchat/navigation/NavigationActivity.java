@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,13 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.steelcrow.androchat.FragmentAbout;
 import com.steelcrow.androchat.R;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private final static int MENU_DIALOGS = 0;
     private ActionBarDrawerToggle toggle;
-
+    private Toolbar toolbar;
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -41,7 +43,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 addFragment(settingsFragment);
                 break;
             case R.id.nav_about:
-                StubFragment aboutFragment = StubFragment.newInstance("О приложении");
+                FragmentAbout aboutFragment = FragmentAbout.newInstance("О приложении");
                 addFragment(aboutFragment);
                 break;
             case R.id.nav_exit:
@@ -54,12 +56,18 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         return true;
     }
 
+
+    public void setActionBarTitle(String title){
+        toolbar.setTitle(title);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -81,7 +89,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         toggle.syncState();
     }
 
-    private void addFragment(StubFragment fragment) {
+    private void addFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction = fragmentTransaction.replace(R.id.content_navigation, fragment);
         fragmentTransaction.commit();

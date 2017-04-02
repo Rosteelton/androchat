@@ -1,5 +1,5 @@
 <resources>
-    <string name="main_greeting_title">Добро пожаловать в Androchat!</string>
+    <string name="main_greeting_title">Androchat</string>
 
     <string name="login">Логин</string>
     <string name="password">Пароль</string>

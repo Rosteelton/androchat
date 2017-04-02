@@ -8,30 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.steelcrow.androchat.chatRoom.ChatsActivity;
 import com.steelcrow.androchat.navigation.NavigationActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextView login;
-    private Button aboutButton;
     private Button logginButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_window);
+        setContentView(R.layout.acivity_login);
         login = (TextView) findViewById(R.id.edit_text_login);
-        aboutButton = (Button) findViewById(R.id.about_application);
-
-        aboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, AboutActivity.class);
-                startActivity(intent);
-            }
-        });
-
         logginButton = (Button) findViewById(R.id.login_button);
         logginButton.setOnClickListener(new View.OnClickListener() {
             @Override
