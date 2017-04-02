@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.steelcrow.androchat.OnChatItemClickListener;
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.conversation.ConversationActivity;
 import com.steelcrow.androchat.dto.ChatItem;
@@ -42,8 +41,9 @@ public class ChatsActivity extends AppCompatActivity {
 
         RecyclerView.Adapter adapter = new ChatsAdapter(getChatList(), new OnChatItemClickListener() {
             @Override
-            public void onItemClick(int elementPosition) {
+            public void onItemClick(CharSequence title) {
                 Intent intent = new Intent(ChatsActivity.this, ConversationActivity.class);
+                intent.putExtra("chatName", title);
                 startActivity(intent);
             }
         });

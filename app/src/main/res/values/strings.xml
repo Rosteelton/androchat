@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">Androchat</string>
+    <string name="main_greeting_title">Добро пожаловать в Androchat!</string>
 
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="login_button_text">Войти</string>
     <string name="application_about_button_text">О приложении</string>
+    <string name="activity_about_developer_name">Соловьев Антон Андреевич</string>
+    <string name="activite_about_developer_field">Разработчик</string>
+    <string name="activity_about_version_field">Версия приложения</string>
+    <string name="activity_about_version">v1.0</string>
 </resources>

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.steelcrow.androchat.OnChatItemClickListener;
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.dto.ChatItem;
 
@@ -51,7 +50,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(getAdapterPosition());
+                    listener.onItemClick(title.getText());
                 }
             });
         }
