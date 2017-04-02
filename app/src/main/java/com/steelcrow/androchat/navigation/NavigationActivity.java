@@ -45,7 +45,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 addFragment(dialogsFragment);
                 break;
             case R.id.nav_settings:
-                StubFragment settingsFragment = StubFragment.newInstance("Настройки");
+                EmptyFragment settingsFragment = EmptyFragment.newInstance("Настройки");
                 addFragment(settingsFragment);
                 break;
             case R.id.nav_about:
@@ -98,6 +98,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
     private void addFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         fragmentTransaction = fragmentTransaction.replace(R.id.content_navigation, fragment);
         fragmentTransaction.commit();
     }
