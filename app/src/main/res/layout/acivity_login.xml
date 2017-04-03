@@ -28,15 +28,10 @@
         android:inputType="textPassword"
         android:maxLines="1" />
 
-    <Button
-        android:id="@+id/login_button"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="124dp"
+    <com.steelcrow.androchat.widgets.ProgressButton
+        android:id="@+id/btn_enter"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/login_button_text"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light" />
+        android:layout_marginTop="32dp" />
 
 </LinearLayout>
