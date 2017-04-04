@@ -11,12 +11,8 @@
 
         <activity
             android:name=".navigation.NavigationActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".chatRoom.ChatRoomFragment"
-            android:label="Выберите чат" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".conversation.ConversationActivity" />
-
-
     </application>
 
 </manifest>

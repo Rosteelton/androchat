@@ -4,4 +4,8 @@
         <attr name="text" format="string|reference" />
         <attr name="enabled" format="boolean|reference" />
     </declare-styleable>
+
+    <declare-styleable name="SendMessageView">
+        <attr name="buttonEnabled" format="boolean|reference" />
+    </declare-styleable>
 </resources>

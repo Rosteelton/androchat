@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_send_message"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/edit_text_send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_weight="0.8"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:paddingBottom="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="2dp"
+        android:hint="Message"
+        tools:text="Привет! Привет! Привет! Привет! Привет! Привет! Привет!  " />
+
+    <ImageButton
+        android:id="@+id/button_send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_weight="0.2"
+        android:background="@drawable/border_icon_send_message"
+        app:srcCompat="@drawable/icon_send_message" />
+</LinearLayout>
