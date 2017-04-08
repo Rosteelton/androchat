@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/conversation_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/conversationBackground">
+    android:orientation="vertical"
+    android:background="@color/conversationBackground"
+    android:weightSum="1">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/conversation_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        android:layout_weight="0.8"/>
 
     <com.steelcrow.androchat.widgets.SendMessageView
         android:id="@+id/send_message_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
         android:gravity="bottom" />
-</RelativeLayout>
+</LinearLayout>

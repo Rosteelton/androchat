@@ -6,10 +6,8 @@ import android.view.View;
 
 import com.steelcrow.androchat.dto.ConversationItem;
 import com.steelcrow.androchat.widgets.SendMessageView;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
+
 
 public class OnClickSendMessageButton implements View.OnClickListener {
 
