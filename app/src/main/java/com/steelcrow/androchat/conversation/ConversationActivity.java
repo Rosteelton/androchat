@@ -6,20 +6,31 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.common.SpacesItemDecoration;
 import com.steelcrow.androchat.dto.ConversationItem;
+import com.steelcrow.androchat.widgets.SendMessageView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ConversationActivity extends AppCompatActivity {
+
+    private SendMessageView sendMessageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
+
+        sendMessageView = (SendMessageView) findViewById(R.id.send_message_view);
 
         Intent intent = getIntent();
         setTitle(intent.getStringExtra("chatName"));
@@ -28,19 +39,19 @@ public class ConversationActivity extends AppCompatActivity {
     }
 
     private void initRecyclearView() {
-        RecyclerView recyclearView = (RecyclerView) findViewById(R.id.conversation_recycler_view);
+        final RecyclerView recyclearView = (RecyclerView) findViewById(R.id.conversation_recycler_view);
         recyclearView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         recyclearView.setLayoutManager(linearLayoutManager);
 
-        RecyclerView.Adapter adapter = new ConversationAdapter(createTestList());
+        final ConversationAdapter adapter = new ConversationAdapter(createTestList());
         recyclearView.setAdapter(adapter);
 
+        sendMessageView.setOnClickButtonHandler(new OnClickSendMessageButton(adapter, recyclearView, sendMessageView));
         recyclearView.addItemDecoration(new SpacesItemDecoration(30));
     }
-
 
     private List<ConversationItem> createTestList() {
         List<ConversationItem> list = new ArrayList<>();

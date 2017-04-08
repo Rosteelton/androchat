@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -54,8 +55,10 @@ public class SendMessageView extends LinearLayout {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().trim().length() == 0) {
                     imageButton.setEnabled(false);
+                    imageButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
                 } else {
                     imageButton.setEnabled(true);
+                    imageButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
             }
 
@@ -66,10 +69,21 @@ public class SendMessageView extends LinearLayout {
         });
     }
 
+    public void setOnClickButtonHandler(View.OnClickListener listener) {
+        imageButton.setOnClickListener(listener);
+    }
+
+    public String getTextMessage() {
+        return editText.getText().toString();
+    }
+
+    public void setTextMessage(String s) {
+        editText.setText(s);
+    }
+
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        editText.setEnabled(enabled);
         imageButton.setEnabled(enabled);
     }
 }
