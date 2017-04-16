@@ -68,7 +68,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         setContentView(R.layout.activity_navigation);
 
         Intent intent = getIntent();
-        Toast.makeText(this, "Добро пожаловать, "+ intent.getStringExtra("Login") + "!", Toast.LENGTH_SHORT).show();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
