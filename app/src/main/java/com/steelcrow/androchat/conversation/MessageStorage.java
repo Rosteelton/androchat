@@ -6,19 +6,25 @@ import com.steelcrow.androchat.dto.ConversationItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaticStorage {
-    private List<ConversationItem> messages;
+public class MessageStorage {
+    private static final MessageStorage ourInstance = new MessageStorage();
+    private static List<ConversationItem> messages;
 
-    public StaticStorage() {
-        this.messages = createTestList();
+
+    public static MessageStorage getInstance() {
+        return ourInstance;
     }
 
-    public void addMessage(ConversationItem message) {
+    public MessageStorage() {
+        messages = createTestList();
+    }
+
+    public static void addMessage(ConversationItem message) {
         messages.add(0, message);
     }
 
-    public List<ConversationItem> getMessages() {
-        return messages;
+    public static List<ConversationItem> getMessages() {
+        return MessageStorage.messages;
     }
 
     private List<ConversationItem> createTestList() {

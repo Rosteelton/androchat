@@ -10,8 +10,6 @@ import java.util.List;
 
 public class MyLoader extends AsyncTaskLoader<List<ConversationItem>> {
 
-    public StaticStorage storage = new StaticStorage();
-
     public MyLoader(Context context) {
         super(context);
     }
@@ -23,6 +21,6 @@ public class MyLoader extends AsyncTaskLoader<List<ConversationItem>> {
 
     @Override
     public List<ConversationItem> loadInBackground() {
-        return storage.getMessages();
+        return MessageStorage.getMessages();
     }
 }

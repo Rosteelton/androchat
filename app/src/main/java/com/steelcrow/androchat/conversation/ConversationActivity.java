@@ -75,7 +75,7 @@ public class ConversationActivity extends FragmentActivity implements LoaderMana
             @Override
             public void onClick(View v) {
                 CharSequence s  = DateFormat.format("dd.MM.yy kk:mm", new Date());
-                loader.storage.addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString()));
+                MessageStorage.addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString()));
                 loader.onContentChanged();
                 sendMessageView.setTextMessage("");
             }
