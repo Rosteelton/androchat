@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PendingIntent pi = createPendingResult(LOGIN_REQUEST_CODE, new Intent(), 0);
+                button.showProgress();
                 startService(new Intent(LoginActivity.this, LoginService.class)
                         .putExtra(PENDING_INTENT, pi)
                         .putExtra(LOGIN, login.getText().toString())
@@ -57,10 +58,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == LOGIN_REQUEST_CODE) {
+            button.hideProgress();
             if (resultCode == RESULT_OK) {
-                Log.d("qwerty", String.valueOf((Boolean)data.getBooleanExtra(LoginService.RESULT, false)));
                 if (!data.getBooleanExtra(LoginService.RESULT, false)) {
                     new LoginActivity.MyDialogFragment().show(this.getSupportFragmentManager(), "AlertDialog");
                 } else {
