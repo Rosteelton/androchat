@@ -5,8 +5,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#28a71a</color>
     <color name="conversationBackground">#00c9d0fd</color>
-    <color name="colorOfMyMessage">#3c6bb463</color>
-    <color name="colorOfForeignMessage">#3cffffff</color>
+    <color name="colorOfMyMessage">#d9f8b5</color>
+    <color name="colorOfForeignMessage">#70cdf2</color>
     <color name="green_light">#d9f8b5</color>
     <color name="green">#aed581</color>
     <color name="green_dark">#76b132</color>

@@ -92,8 +92,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public void addItem(ConversationItem item) {
-        items.add(0, item);
-        notifyItemInserted(0);
+    public void setItems(List<ConversationItem> messages) {
+        this.items = messages;
     }
 }
