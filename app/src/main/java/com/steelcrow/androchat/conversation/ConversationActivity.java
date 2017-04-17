@@ -2,9 +2,9 @@ package com.steelcrow.androchat.conversation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ConversationActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<List<ConversationItem>> {
+public class ConversationActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ConversationItem>> {
 
     private ConversationAdapter adapter;
     public MyLoader loader;
@@ -37,20 +37,19 @@ public class ConversationActivity extends FragmentActivity implements LoaderMana
         setTitle(intent.getStringExtra("chatName"));
 
         loader = (MyLoader) getSupportLoaderManager().initLoader(0, null, this);
-
         initRecyclearView();
     }
 
     @Override
     public Loader<List<ConversationItem>> onCreateLoader(int id, Bundle args) {
-        loader = new MyLoader(this);
-        return loader;
+        return new MyLoader(this);
     }
+
 
     @Override
     public void onLoadFinished(Loader<List<ConversationItem>> loader, List<ConversationItem> data) {
         adapter.setItems(data);
-        adapter.notifyDataSetChanged();
+        recyclearView.getAdapter().notifyDataSetChanged();
         recyclearView.scrollToPosition(0);
     }
 
@@ -75,7 +74,8 @@ public class ConversationActivity extends FragmentActivity implements LoaderMana
             @Override
             public void onClick(View v) {
                 CharSequence s  = DateFormat.format("dd.MM.yy kk:mm", new Date());
-                MessageStorage.addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString()));
+                MessageStorage.getInstance().addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString()));
+                loader = (MyLoader) getSupportLoaderManager().restartLoader(0, null, ConversationActivity.this);
                 loader.onContentChanged();
                 sendMessageView.setTextMessage("");
             }

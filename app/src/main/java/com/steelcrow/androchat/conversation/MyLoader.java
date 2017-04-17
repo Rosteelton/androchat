@@ -9,6 +9,7 @@ import com.steelcrow.androchat.dto.ConversationItem;
 import java.util.List;
 
 public class MyLoader extends AsyncTaskLoader<List<ConversationItem>> {
+    private List<ConversationItem> cache;
 
     public MyLoader(Context context) {
         super(context);
@@ -16,11 +17,21 @@ public class MyLoader extends AsyncTaskLoader<List<ConversationItem>> {
 
     @Override
     protected void onStartLoading() {
-        forceLoad();
+        if (cache != null) {
+            deliverResult(cache);
+        } else {
+            forceLoad();
+        }
+    }
+
+    @Override
+    public void deliverResult(List<ConversationItem> data) {
+        cache = data;
+        super.deliverResult(data);
     }
 
     @Override
     public List<ConversationItem> loadInBackground() {
-        return MessageStorage.getMessages();
+        return MessageStorage.getInstance().getMessages();
     }
 }

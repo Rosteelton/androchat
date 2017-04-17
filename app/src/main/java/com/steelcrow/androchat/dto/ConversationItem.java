@@ -22,4 +22,13 @@ public class ConversationItem {
     public String getTimestamp() {
         return timestamp;
     }
+
+    @Override
+    public String toString() {
+        return "ConversationItem{" +
+                "sender='" + sender + '\'' +
+                ", message='" + message + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                '}';
+    }
 }

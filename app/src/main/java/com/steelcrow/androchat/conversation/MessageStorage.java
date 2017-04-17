@@ -8,8 +8,7 @@ import java.util.List;
 
 public class MessageStorage {
     private static final MessageStorage ourInstance = new MessageStorage();
-    private static List<ConversationItem> messages;
-
+    private List<ConversationItem> messages;
 
     public static MessageStorage getInstance() {
         return ourInstance;
@@ -19,12 +18,12 @@ public class MessageStorage {
         messages = createTestList();
     }
 
-    public static void addMessage(ConversationItem message) {
+    public void addMessage(ConversationItem message) {
         messages.add(0, message);
     }
 
-    public static List<ConversationItem> getMessages() {
-        return MessageStorage.messages;
+    public List<ConversationItem> getMessages() {
+        return messages;
     }
 
     private List<ConversationItem> createTestList() {
