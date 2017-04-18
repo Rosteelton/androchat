@@ -8,7 +8,6 @@
         android:label="@string/main_greeting_title"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".navigation.NavigationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -16,17 +15,20 @@
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
         <activity android:name=".conversation.ConversationActivity" />
 
         <service android:name=".service.LoginService" />
+
+        <activity
+            android:name=".SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
