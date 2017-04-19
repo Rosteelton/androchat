@@ -4,4 +4,8 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="person_about_normal_width">132dp</dimen>
+    <dimen name="person_about_normal_height">114dp</dimen>
+    <dimen name="person_about_max_width">170dp</dimen>
+    <dimen name="person_about_max_height">149dp</dimen>
 </resources>
