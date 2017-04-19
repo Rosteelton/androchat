@@ -18,22 +18,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
-        octopus = (ImageView) findViewById(R.id.splashscreen);
-        Log.d("qwertyyyyyy","123");
 
-        AnimatedVectorDrawableCompat drawableCompat = AnimatedVectorDrawableCompat.create(this, R.drawable.ic_octopus);
-        octopus.setImageDrawable(drawableCompat);
-        drawableCompat.start();
+        octopus = (ImageView) findViewById(R.id.octopus_from_image_view);
+        AnimatedVectorDrawableCompat animatedVector = AnimatedVectorDrawableCompat.create(this, R.drawable.anim_android);
+        octopus.setImageDrawable(animatedVector);
+        animatedVector.start();
 
-//        AnimatedVectorDrawableCompat animatedVector = AnimatedVectorDrawableCompat.create(this, R.drawable.ic_octopus);
-//        octopus.setImageDrawable(animatedVector);
-//        animatedVector.start();
-
-//        Drawable drawable = octopus.getDrawable();
-//        if (drawable instanceof Animatable){
-//            Log.d("qwertyyyyyy","werqwerqwerqwerqwerqwerjhjfghjfghjfghjfgjhfghjfghjfgjh");
-//            ((Animatable) drawable).start();
-//        }
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {

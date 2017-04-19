@@ -9,7 +9,7 @@
     tools:context="com.steelcrow.androchat.SplashScreenActivity">
 
     <ImageView
-        android:id="@+id/splashscreen"
+        android:id="@+id/octopus_from_image_view"
         android:layout_width="164dp"
         android:layout_height="194dp"
         android:layout_gravity="center"
