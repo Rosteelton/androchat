@@ -74,7 +74,7 @@ public class ConversationActivity extends AppCompatActivity implements LoaderMan
             @Override
             public void onClick(View v) {
                 CharSequence s  = DateFormat.format("dd.MM.yy kk:mm", new Date());
-                MessageStorage.getInstance().addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString()));
+                MessageStorage.getInstance().addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString(), ));
                 loader = (MyLoader) getSupportLoaderManager().restartLoader(0, null, ConversationActivity.this);
                 loader.onContentChanged();
                 sendMessageView.setTextMessage("");

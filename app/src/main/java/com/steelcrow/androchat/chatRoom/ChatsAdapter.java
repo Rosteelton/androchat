@@ -31,6 +31,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(items.get(position).getTitle());
         holder.description.setText(items.get(position).getDescription());
+        holder.title.setTag(items.get(position).getChatItemId());
     }
 
     @Override
@@ -46,13 +47,13 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
             super(view);
             title = (TextView) view.findViewById(R.id.text_view_title);
             description = (TextView) view.findViewById(R.id.text_view_desc);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(title.getText());
+                    listener.onItemClick(title.getText(), (int) title.getTag());
                 }
             });
         }
+
     }
 }

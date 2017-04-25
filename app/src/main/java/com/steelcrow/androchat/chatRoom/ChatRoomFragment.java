@@ -2,7 +2,9 @@ package com.steelcrow.androchat.chatRoom;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.conversation.ConversationActivity;
 import com.steelcrow.androchat.dto.ChatItem;
@@ -25,6 +28,7 @@ import java.util.List;
 public class ChatRoomFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private FloatingActionButton floatingActionButton;
     private String title;
 
     public static ChatRoomFragment newInstance(String title) {
@@ -56,11 +60,12 @@ public class ChatRoomFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new ChatsAdapter(getChatList(), new OnChatItemClickListener() {
+        RecyclerView.Adapter adapter = new ChatsAdapter(getPreviousChatItems(), new OnChatItemClickListener() {
             @Override
-            public void onItemClick(CharSequence title) {
+            public void onItemClick(CharSequence chatTitle, int chatItemId) {
                 Intent intent = new Intent(getActivity(), ConversationActivity.class);
-                intent.putExtra("chatName", title);
+                intent.putExtra("chatName", chatTitle);
+                intent.putExtra("chatId", chatItemId);
                 startActivity(intent);
             }
         });
@@ -68,34 +73,21 @@ public class ChatRoomFragment extends Fragment {
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(activity, layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 
-    private List<ChatItem> getChatList() {
-        List<ChatItem> list = new ArrayList<>();
-
-        list.add(new ChatItem("1 чат", "1 сообщение"));
-        list.add(new ChatItem("2 чат", "2 сообщение"));
-        list.add(new ChatItem("3 чат", "3 сообщение"));
-        list.add(new ChatItem("4 чат", "4 сообщение"));
-        list.add(new ChatItem("5 чат", "5 сообщение"));
-        list.add(new ChatItem("6 чат", "6 сообщение"));
-        list.add(new ChatItem("7 чат", "7 сообщение"));
-        list.add(new ChatItem("8 чат", "8 сообщение"));
-        list.add(new ChatItem("9 чат", "9 сообщение"));
-        list.add(new ChatItem("10 чат", "10 сообщение"));
-        list.add(new ChatItem("11 чат", "11 сообщение"));
-        list.add(new ChatItem("12 чат", "12 сообщение"));
-        list.add(new ChatItem("13 чат", "13 сообщение"));
-        list.add(new ChatItem("14 чат", "14 сообщение"));
-        list.add(new ChatItem("15 чат", "15 сообщение"));
-        list.add(new ChatItem("16 чат", "16 сообщение"));
-        list.add(new ChatItem("17 чат", "17 сообщение"));
-        list.add(new ChatItem("18 чат", "18 сообщение"));
-        list.add(new ChatItem("19 чат", "19 сообщение"));
-        list.add(new ChatItem("20 чат", "20 сообщение"));
-        return list;
+    @NonNull
+    private List<ChatItem> getPreviousChatItems() {
+        return SQLite.select().from(ChatItem.class).queryList();
     }
-
 
 }

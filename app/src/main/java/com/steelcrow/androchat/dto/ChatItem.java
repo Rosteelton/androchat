@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.structure.database.AndroidDatabase;
 public class ChatItem {
 
     @PrimaryKey(autoincrement = true)
-    private long chatItem;
+    private long chatItemId;
 
     @Column
     private String title;
@@ -20,12 +20,13 @@ public class ChatItem {
     @Column
     private long timestamp;
 
-    public long getChatItem() {
-        return chatItem;
+
+    public long getChatItemId() {
+        return chatItemId;
     }
 
-    public void setChatItem(long chatItem) {
-        this.chatItem = chatItem;
+    public void setChatItemId(long chatItemId) {
+        this.chatItemId = chatItemId;
     }
 
     public String getTitle() {

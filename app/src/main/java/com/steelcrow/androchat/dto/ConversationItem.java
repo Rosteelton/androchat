@@ -20,10 +20,22 @@ public class ConversationItem {
     @Column
     private String timestamp;
 
-    public ConversationItem(String sender, String message, String timestamp) {
+    @Column
+    private long chatId;
+
+    public ConversationItem(String sender, String message, String timestamp, long chatId) {
         this.sender = sender;
         this.message = message;
         this.timestamp = timestamp;
+        this.chatId = chatId;
+    }
+
+    public long getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(long chatId) {
+        this.chatId = chatId;
     }
 
     public String getConversationItemId() {

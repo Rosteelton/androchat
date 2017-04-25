@@ -14,15 +14,14 @@
         android:layout_alignParentStart="true" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:elevation="2dp"
         android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:visibility="visible"
         app:layout_anchor="@id/recycler_view"
         app:layout_anchorGravity="bottom|right|end"
-        app:fabSize="normal"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_plus_sign" />
+        app:srcCompat="@drawable/ic_add_black_24px" />
 
 </android.support.design.widget.CoordinatorLayout>
