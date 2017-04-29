@@ -18,7 +18,10 @@
             android:configChanges="orientation|screenSize">
         </activity>
 
-        <activity android:name=".conversation.ConversationActivity" />
+        <activity
+            android:name=".conversation.ConversationActivity"
+            android:theme="@style/noActionWithTitleBarColor"
+            />
 
         <service android:name=".service.LoginService" />
 

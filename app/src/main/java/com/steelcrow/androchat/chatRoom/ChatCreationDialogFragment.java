@@ -20,11 +20,12 @@ public class ChatCreationDialogFragment extends DialogFragment {
 
 
     public interface ChatCreationDialogListener {
-        public void onDialogPositiveClick(ChatCreationDialogFragment dialog, CharSequence chatName);
+        public void onDialogPositiveClick(ChatCreationDialogFragment dialog, CharSequence chatName, CharSequence chatDescription);
     }
 
     ChatCreationDialogListener listener;
     TextView chatName;
+    TextView chatDescription;
 
     @Override
     public void onAttach(Context context) {
@@ -50,9 +51,10 @@ public class ChatCreationDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         chatName = (TextView) getDialog().findViewById(R.id.chatName);
-                        CharSequence text = chatName.getText();
-                        if (!(text == null || text.length() == 0)) {
-                            listener.onDialogPositiveClick(ChatCreationDialogFragment.this, text);
+                        chatDescription = (TextView) getDialog().findViewById(R.id.chatDescription);
+                        CharSequence chatName = ChatCreationDialogFragment.this.chatName.getText();
+                        if (!(chatName == null || chatName.length() == 0)) {
+                            listener.onDialogPositiveClick(ChatCreationDialogFragment.this, chatName, chatDescription.getText());
                         }
                     }
                 })

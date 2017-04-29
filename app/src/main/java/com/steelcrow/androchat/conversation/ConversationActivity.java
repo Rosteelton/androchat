@@ -1,5 +1,6 @@
 package com.steelcrow.androchat.conversation;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -7,12 +8,21 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.format.DateFormat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.common.SpacesItemDecoration;
+import com.steelcrow.androchat.dto.ChatItem;
+import com.steelcrow.androchat.dto.ChatItem_Table;
 import com.steelcrow.androchat.dto.ConversationItem;
 import com.steelcrow.androchat.widgets.SendMessageView;
 
@@ -39,7 +49,24 @@ public class ConversationActivity extends AppCompatActivity implements LoaderMan
         chatId = intent.getLongExtra("chatId", 0);
 
         loader = (MyLoader) getSupportLoaderManager().initLoader(0, null, this);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar_conversation);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initRecyclearView();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

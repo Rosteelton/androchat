@@ -17,5 +17,6 @@
     <string name="menu_settings">Настройки</string>
     <string name="menu_about">О приложении</string>
     <string name="menu_exit">Выход</string>
-    <string name="chatName">Chat name</string>
+    <string name="chatName">Имя чата</string>
+    <string name="chatDescription">Описание</string>
 </resources>

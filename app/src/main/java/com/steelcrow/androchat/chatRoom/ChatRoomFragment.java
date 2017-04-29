@@ -91,12 +91,12 @@ public class ChatRoomFragment extends Fragment implements ChatCreationDialogFrag
     }
 
     @Override
-    public void onDialogPositiveClick(ChatCreationDialogFragment dialog, CharSequence chatName) {
-        addNewChat(chatName);
+    public void onDialogPositiveClick(ChatCreationDialogFragment dialog, CharSequence chatName, CharSequence chatDescription) {
+        addNewChat(chatName, chatDescription);
     }
 
-    private void addNewChat(CharSequence chatName) {
-        ChatItem newItem = new ChatItem(chatName.toString(), "Клевый чат");
+    private void addNewChat(CharSequence chatName, CharSequence chatDescription) {
+        ChatItem newItem = new ChatItem(chatName.toString(), chatDescription.toString());
         FlowManager.getModelAdapter(ChatItem.class).save(newItem);
         adapter.addDialog(newItem);
     }
