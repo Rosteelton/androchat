@@ -27,6 +27,11 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         return new ViewHolder(view, listener);
     }
 
+    public void addDialog(ChatItem chatItem) {
+        items.add(chatItem);
+        notifyItemInserted(items.size());
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(items.get(position).getTitle());
@@ -50,7 +55,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(title.getText(), (int) title.getTag());
+                    listener.onItemClick(title.getText(), (long) title.getTag());
                 }
             });
         }

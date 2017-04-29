@@ -1,32 +1,60 @@
 package com.steelcrow.androchat.chatRoom;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.widget.TextView;
+
+import com.steelcrow.androchat.R;
 
 
 public class ChatCreationDialogFragment extends DialogFragment {
 
+
+    public interface ChatCreationDialogListener {
+        public void onDialogPositiveClick(DialogFragment dialog, CharSequence chatName);
+    }
+
+    ChatCreationDialogListener listener;
+    TextView chatName;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (ChatCreationDialogListener) getTargetFragment();
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement NoticeDialogListener");
+        }
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        builder.setTitle("Введите название чата");
+        builder.setView(inflater.inflate(R.layout.layout_new_chat_dialog, null))
+        .setPositiveButton("Добавить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                chatName = (TextView) getDialog().findViewById(R.id.chatName);
+                listener.onDialogPositiveClick(ChatCreationDialogFragment.this, chatName.getText());
+            }
+        })
+        .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ChatCreationDialogFragment.this.getDialog().cancel();
+            }
+        });
+        return builder.create();
     }
 }
-//public static class MyDialogFragment extends DialogFragment {
-//    @NonNull
-//    @Override
-//    public Dialog onCreateDialog(Bundle savedInstanceState) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setTitle("Ошибка авторизации!");
-//        builder.setMessage("Неправильная пара логин/пароль");
-//        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dismiss();
-//            }
-//        });
-//        return builder.create();
-//    }
-//}

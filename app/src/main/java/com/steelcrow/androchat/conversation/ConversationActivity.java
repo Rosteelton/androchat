@@ -10,12 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.View;
 
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.common.SpacesItemDecoration;
 import com.steelcrow.androchat.dto.ConversationItem;
 import com.steelcrow.androchat.widgets.SendMessageView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +24,8 @@ public class ConversationActivity extends AppCompatActivity implements LoaderMan
     private ConversationAdapter adapter;
     public MyLoader loader;
     private SendMessageView sendMessageView;
-    private RecyclerView recyclearView;
+    private RecyclerView recyclerView;
+    private long chatId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class ConversationActivity extends AppCompatActivity implements LoaderMan
 
         Intent intent = getIntent();
         setTitle(intent.getStringExtra("chatName"));
+        chatId = intent.getLongExtra("chatId", 0);
 
         loader = (MyLoader) getSupportLoaderManager().initLoader(0, null, this);
         initRecyclearView();
@@ -42,46 +44,53 @@ public class ConversationActivity extends AppCompatActivity implements LoaderMan
 
     @Override
     public Loader<List<ConversationItem>> onCreateLoader(int id, Bundle args) {
-        return new MyLoader(this);
+        return new MyLoader(this, chatId);
     }
-
 
     @Override
     public void onLoadFinished(Loader<List<ConversationItem>> loader, List<ConversationItem> data) {
         adapter.setItems(data);
-        recyclearView.getAdapter().notifyDataSetChanged();
-        recyclearView.scrollToPosition(0);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scrollToPosition(0);
     }
 
     @Override
     public void onLoaderReset(Loader<List<ConversationItem>> loader) {
-        recyclearView.setAdapter(null);
+        recyclerView.setAdapter(null);
     }
 
     private void initRecyclearView() {
 
-        recyclearView = (RecyclerView) findViewById(R.id.conversation_recycler_view);
-        recyclearView.setHasFixedSize(true);
+        recyclerView = (RecyclerView) findViewById(R.id.conversation_recycler_view);
+        recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
-        recyclearView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new ConversationAdapter(new ArrayList<ConversationItem>());
-        recyclearView.setAdapter(adapter);
+        adapter = new ConversationAdapter(MyLoader.getMessages(chatId));
+        recyclerView.setAdapter(adapter);
 
         sendMessageView.setOnClickButtonHandler(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CharSequence s  = DateFormat.format("dd.MM.yy kk:mm", new Date());
-                MessageStorage.getInstance().addMessage(new ConversationItem("Anton Solovyev", sendMessageView.getTextMessage(), s.toString(), ));
+                ConversationItem item = createNewMessage(sendMessageView.getTextMessage(), chatId);
+                saveMessage(item);
                 loader = (MyLoader) getSupportLoaderManager().restartLoader(0, null, ConversationActivity.this);
                 loader.onContentChanged();
                 sendMessageView.setTextMessage("");
             }
         });
-        recyclearView.addItemDecoration(new SpacesItemDecoration(30));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(30));
     }
 
+    private ConversationItem createNewMessage(String text, long chatId) {
+        CharSequence s = DateFormat.format("dd.MM.yy kk:mm:ss", new Date());
+        return new ConversationItem("Anton Solovyev", text, s.toString(), chatId);
+    }
+
+    private void saveMessage(ConversationItem item) {
+        FlowManager.getModelAdapter(ConversationItem.class).save(item);
+    }
 
 }

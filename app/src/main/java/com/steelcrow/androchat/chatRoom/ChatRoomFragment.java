@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.steelcrow.androchat.R;
 import com.steelcrow.androchat.conversation.ConversationActivity;
@@ -25,11 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChatRoomFragment extends Fragment {
+public class ChatRoomFragment extends Fragment implements ChatCreationDialogFragment.ChatCreationDialogListener {
 
     private RecyclerView recyclerView;
     private FloatingActionButton floatingActionButton;
     private String title;
+    ChatsAdapter adapter;
 
     public static ChatRoomFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -60,9 +63,10 @@ public class ChatRoomFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new ChatsAdapter(getPreviousChatItems(), new OnChatItemClickListener() {
+
+        adapter = new ChatsAdapter(getPreviousChatItems(), new OnChatItemClickListener() {
             @Override
-            public void onItemClick(CharSequence chatTitle, int chatItemId) {
+            public void onItemClick(CharSequence chatTitle, long chatItemId) {
                 Intent intent = new Intent(getActivity(), ConversationActivity.class);
                 intent.putExtra("chatName", chatTitle);
                 intent.putExtra("chatId", chatItemId);
@@ -78,11 +82,26 @@ public class ChatRoomFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DialogFragment dialog = new ChatCreationDialogFragment();
+                dialog.setTargetFragment(ChatRoomFragment.this, 0);
+                dialog.show(getActivity().getSupportFragmentManager(), "ChatCreationDialogFragment");
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, CharSequence chatName) {
+        if (chatName != null) {
+            addNewChat(chatName);
+        }
+    }
+
+    private void addNewChat(CharSequence chatName) {
+        ChatItem newItem = new ChatItem(chatName.toString(), "Клевый чат");
+        FlowManager.getModelAdapter(ChatItem.class).save(newItem);
+        adapter.addDialog(newItem);
     }
 
     @NonNull

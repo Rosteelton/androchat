@@ -3,22 +3,21 @@ package com.steelcrow.androchat.dto;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.database.AndroidDatabase;
 
-@Table(database = AndroidDatabase.class)
+@Table(database = AndrochatDatabase.class)
 public class ChatItem {
 
     @PrimaryKey(autoincrement = true)
-    private long chatItemId;
+    long chatItemId;
 
     @Column
-    private String title;
+    String title;
 
     @Column
-    private String description;
+    String description;
 
     @Column
-    private long timestamp;
+    long timestamp;
 
 
     public long getChatItemId() {
@@ -43,6 +42,9 @@ public class ChatItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ChatItem() {
     }
 
     public ChatItem(String title, String description) {

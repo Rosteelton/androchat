@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/foreign_date"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
             android:textAlignment="textEnd"
             android:textSize="13sp"
