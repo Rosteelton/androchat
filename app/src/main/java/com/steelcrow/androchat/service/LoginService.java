@@ -23,7 +23,7 @@ public class LoginService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         try {
-            Thread.sleep(3000); // long authorize action
+            Thread.sleep(1000); // long authorize action
 
             //mock
             assert intent != null;
@@ -31,7 +31,7 @@ public class LoginService extends IntentService {
             PendingIntent pendingIntent = intent.getParcelableExtra(LoginActivity.PENDING_INTENT);
             String login = intent.getStringExtra(LoginActivity.LOGIN);
             String password = intent.getStringExtra(LoginActivity.PASSWORD);
-            if (login.equals("a") && password.equals("a")) {
+            if (!login.equals("a") && !password.equals("a")) {
                 Intent result = new Intent().putExtra(LoginService.RESULT, true);
                 try {
                     pendingIntent.send(this, RESULT_OK, result);

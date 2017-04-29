@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 public class SplashScreenActivity extends AppCompatActivity {
-    private final int SPLASH_DISPLAY_LENGTH = 3000;
+    private final int SPLASH_DISPLAY_LENGTH = 1500;
     private ImageView octopus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
