@@ -42,7 +42,6 @@ public class ChatRoomFragment extends Fragment implements ChatCreationDialogFrag
         return fragment;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +81,7 @@ public class ChatRoomFragment extends Fragment implements ChatCreationDialogFrag
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialog = new ChatCreationDialogFragment();
+                ChatCreationDialogFragment dialog = new ChatCreationDialogFragment();
                 dialog.setTargetFragment(ChatRoomFragment.this, 0);
                 dialog.show(getActivity().getSupportFragmentManager(), "ChatCreationDialogFragment");
             }
@@ -92,10 +91,8 @@ public class ChatRoomFragment extends Fragment implements ChatCreationDialogFrag
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, CharSequence chatName) {
-        if (chatName != null) {
-            addNewChat(chatName);
-        }
+    public void onDialogPositiveClick(ChatCreationDialogFragment dialog, CharSequence chatName) {
+        addNewChat(chatName);
     }
 
     private void addNewChat(CharSequence chatName) {

@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.steelcrow.androchat.R;
@@ -17,7 +20,7 @@ public class ChatCreationDialogFragment extends DialogFragment {
 
 
     public interface ChatCreationDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog, CharSequence chatName);
+        public void onDialogPositiveClick(ChatCreationDialogFragment dialog, CharSequence chatName);
     }
 
     ChatCreationDialogListener listener;
@@ -35,26 +38,62 @@ public class ChatCreationDialogFragment extends DialogFragment {
         }
     }
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setTitle("Введите название чата");
         builder.setView(inflater.inflate(R.layout.layout_new_chat_dialog, null))
-        .setPositiveButton("Добавить", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Добавить", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        chatName = (TextView) getDialog().findViewById(R.id.chatName);
+                        CharSequence text = chatName.getText();
+                        if (!(text == null || text.length() == 0)) {
+                            listener.onDialogPositiveClick(ChatCreationDialogFragment.this, text);
+                        }
+                    }
+                })
+                .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ChatCreationDialogFragment.this.getDialog().cancel();
+                    }
+                });
+
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onShow(DialogInterface dialog) {
+                Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setEnabled(false);
                 chatName = (TextView) getDialog().findViewById(R.id.chatName);
-                listener.onDialogPositiveClick(ChatCreationDialogFragment.this, chatName.getText());
-            }
-        })
-        .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ChatCreationDialogFragment.this.getDialog().cancel();
+                chatName.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() >= 1) {
+                            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                        } else {
+                            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
             }
         });
-        return builder.create();
+        return alertDialog;
     }
 }
