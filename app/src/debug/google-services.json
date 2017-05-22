@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "357399496762",
+    "firebase_url": "https://androchat-3cecb.firebaseio.com",
+    "project_id": "androchat-3cecb",
+    "storage_bucket": "androchat-3cecb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357399496762:android:0db7816a879d28b5",
+        "android_client_info": {
+          "package_name": "com.steelcrow.androchat.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357399496762-vs5mogvqko8j7pud18tstk5pv8adeo02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.steelcrow.androchat.debug",
+            "certificate_hash": "1e14f6c08427e22461b3c2d777d90c5c52f42355"
+          }
+        },
+        {
+          "client_id": "357399496762-dlpo83ioe5qnq66liqucklnnge74hrdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBct9oVJtefaHjLdYaH4qnFgYuDsI915Ik"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "357399496762-dlpo83ioe5qnq66liqucklnnge74hrdf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
